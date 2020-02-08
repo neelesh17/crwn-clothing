@@ -14,7 +14,7 @@ ReactDOM.render(
             <PersistGate persistor= { persistor }> 
                 <App />
             </PersistGate>
-        </BrowserRouter>,
-    </Provider> ,
+        </BrowserRouter>
+    </Provider>,
     document.getElementById('root')
     );
