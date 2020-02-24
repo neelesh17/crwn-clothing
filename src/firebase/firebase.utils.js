@@ -10,10 +10,10 @@ const config = {
     storageBucket: "crwn-db-40a55.appspot.com",
     messagingSenderId: "119921873388",
     appId: "1:119921873388:web:e906f80d99dea36875b0c9",
-    measurementId: "G-Q0J2B5PD3V"
+    measurementId: "G-Q0J2B5PD3V",
   };
 
-  export const createUserProfileDocument = async (userAuth,displayName , ...additionalData) => {
+  export const createUserProfileDocument = async (userAuth, ...additionalData) => {
     if(!userAuth) return;
 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -66,12 +66,21 @@ const config = {
 
   firebase.initializeApp(config);
 
+  export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = auth.onAuthStateChanged(userAuth => {
+        unsubscribe();
+        resolve(userAuth);
+      }, reject)
+    });
+  }
+
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
 
-  const provider = new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({ 'prompt': 'select_account' });
+  export const googleProvider = new firebase.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ 'prompt': 'select_account' });
 
-  export const SignInWithGoogle = () => auth.signInWithPopup(provider);
+  export const SignInWithGoogle = () => auth.signInWithPopup(googleProvider);
 
   export default firebase;
