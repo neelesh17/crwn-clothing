@@ -21,4 +21,13 @@ export const clearItemFromCart = item => ({
 
 export const clearCart = () =>({
     type: CartActionTypes.CLEAR_CART,
-})
+});
+
+export const updateCartItemsInFirebase = () => ({
+    type: CartActionTypes.UPDATE_CART_IN_FIREBASE,
+});
+
+export const setCartItemsFromFirebase = (cartItems) => ({
+    type: CartActionTypes.SET_CART_ITEMS_FROM_FIREBASE,
+    payload: cartItems
+});
